@@ -10,10 +10,7 @@ test: fmtcheck
 		xargs -t -n4 go test $(TESTARGS) -timeout=30s -parallel=4
 
 testacc: fmtcheck
-	@sh -c "source $(TEST_FOLDER)/setup_testacc.sh"
-	docker compose -f $(TEST_FOLDER)/docker-compose.yml up -d --wait
-	go test ./provider -v
-	docker compose -f $(TEST_FOLDER)/docker-compose.yml down
+	@sh -c "$(TEST_FOLDER)/testacc.sh"
 
 vet:
 	@echo "go vet ."
