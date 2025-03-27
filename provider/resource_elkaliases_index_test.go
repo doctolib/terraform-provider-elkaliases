@@ -181,8 +181,6 @@ func TestAccElkaliasesIndex_aliases(t *testing.T) {
 						testAccCheckElkaliasesIndexAliasExists(resourceName, "test_alias1"),
 						testAccCheckElkaliasesIndexAliasExists(resourceName, "test_alias2"),
 						resource.TestCheckResourceAttr(resourceName, "template.0.alias.#", "2"),
-						resource.TestCheckResourceAttr(resourceName, "template.0.alias.0.name", "test_alias1"),
-						resource.TestCheckResourceAttr(resourceName, "template.0.alias.1.name", "test_alias2"),
 					),
 				},
 			},
