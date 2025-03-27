@@ -201,17 +201,21 @@ func resourceelkAliasesIndexRead(d *schema.ResourceData, m interface{}) error {
 
 		// Handle aliases
 		if aliases, ok := templateContent["aliases"].(map[string]interface{}); ok {
-			var aliasList []interface{}
-			for aliasName, aliasConfig := range aliases {
-				filterJson, err := json.Marshal(aliasConfig.(map[string]any)["filter"])
-				if err != nil {
-					return fmt.Errorf("error marshaling filter: %s", err)
+			templateAliases := d.Get("template.0.alias").([]any)
+
+			var aliasList []any
+			for _, alias := range templateAliases {
+				alias := alias.(map[string]any)
+				if config, exist := aliases[alias["name"].(string)]; exist {
+					filterJson, err := json.Marshal(config.(map[string]any)["filter"])
+					if err != nil {
+						return fmt.Errorf("error marshaling filter: %s", err)
+					}
+					aliasList = append(aliasList, map[string]any{
+						"name":   alias["name"],
+						"filter": string(filterJson),
+					})
 				}
-				aliasEntry := map[string]interface{}{
-					"name":   aliasName,
-					"filter": string(filterJson),
-				}
-				aliasList = append(aliasList, aliasEntry)
 			}
 			templateVar["alias"] = aliasList
 		}
