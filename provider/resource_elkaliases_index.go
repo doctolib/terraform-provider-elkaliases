@@ -200,11 +200,11 @@ func resourceelkAliasesIndexRead(d *schema.ResourceData, m interface{}) error {
 		}
 
 		// Handle aliases
-		if aliases, ok := templateContent["aliases"].(map[string]interface{}); ok {
-			templateAliases := d.Get("template.0.alias").([]any)
-
+		if aliases, ok := templateContent["aliases"].(map[string]any); ok {
+			stateAliases := d.Get("template.0.alias").([]any)
 			var aliasList []any
-			for _, alias := range templateAliases {
+
+			for _, alias := range stateAliases {
 				alias := alias.(map[string]any)
 				if config, exist := aliases[alias["name"].(string)]; exist {
 					filterJson, err := json.Marshal(config.(map[string]any)["filter"])
@@ -217,6 +217,20 @@ func resourceelkAliasesIndexRead(d *schema.ResourceData, m interface{}) error {
 					})
 				}
 			}
+
+			for name, config := range aliases {
+				if !isInMap(stateAliases, "name", name) {
+					filterJson, err := json.Marshal(config.(map[string]any)["filter"])
+					if err != nil {
+						return fmt.Errorf("error marshaling filter: %s", err)
+					}
+					aliasList = append(aliasList, map[string]any{
+						"name":   name,
+						"filter": string(filterJson),
+					})
+				}
+			}
+
 			templateVar["alias"] = aliasList
 		}
 	}
@@ -227,6 +241,16 @@ func resourceelkAliasesIndexRead(d *schema.ResourceData, m interface{}) error {
 	}
 
 	return nil
+}
+
+func isInMap(list []any, key string, value any) bool {
+	for _, element := range list {
+		element := element.(map[string]any)
+		if element[key] == value {
+			return true
+		}
+	}
+	return false
 }
 
 func resourceelkAliasesIndexUpdate(d *schema.ResourceData, m interface{}) error {
