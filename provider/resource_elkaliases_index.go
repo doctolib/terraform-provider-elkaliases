@@ -15,6 +15,9 @@ func resourceelkAliasesIndex() *schema.Resource {
 		Read:   resourceelkAliasesIndexRead,
 		Update: resourceelkAliasesIndexUpdate,
 		Delete: resourceelkAliasesIndexDelete,
+		Importer: &schema.ResourceImporter{
+			State: resourceelkAliasesIndexImport,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
@@ -277,4 +280,12 @@ func resourceelkAliasesIndexDelete(d *schema.ResourceData, m interface{}) error 
 	d.SetId("")
 
 	return nil
+}
+
+func resourceelkAliasesIndexImport(d *schema.ResourceData, m any) ([]*schema.ResourceData, error) {
+	err := resourceelkAliasesIndexRead(d, m)
+	if err != nil {
+		return nil, err
+	}
+	return []*schema.ResourceData{d}, nil
 }
