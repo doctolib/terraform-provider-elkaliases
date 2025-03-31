@@ -44,7 +44,8 @@ func resourceelkAliasesIndex() *schema.Resource {
 							Required: true,
 						},
 						"alias": {
-							Type: schema.TypeList,
+							Type:     schema.TypeList,
+							Optional: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"name": {
@@ -57,7 +58,6 @@ func resourceelkAliasesIndex() *schema.Resource {
 									},
 								},
 							},
-							Optional: true,
 						},
 					},
 				},
