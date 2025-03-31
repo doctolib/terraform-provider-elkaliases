@@ -234,5 +234,23 @@ func resourceelkAliasesIndexUpdate(d *schema.ResourceData, m interface{}) error 
 }
 
 func resourceelkAliasesIndexDelete(d *schema.ResourceData, m interface{}) error {
+	es := m.(*elasticsearch.Client)
+
+	name := d.Id()
+
+	// Perform the delete operation
+	res, err := es.Indices.DeleteIndexTemplate(name)
+	if err != nil {
+		return fmt.Errorf("error deleting Elasticsearch index template: %s", err)
+	}
+	defer res.Body.Close()
+
+	if res.IsError() {
+		return fmt.Errorf("error response from Elasticsearch when deleting index template: %s", res.String())
+	}
+
+	// If delete is successful, remove it from the state
+	d.SetId("")
+
 	return nil
 }
