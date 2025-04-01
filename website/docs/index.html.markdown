@@ -25,8 +25,8 @@ provider "elkaliases" {
 Provider settings can be specified via environment variables as follows:
 
 ```shell
-export ELKALIASES_URL=http://localhost:9200
-export ELKALIASES_TOKEN=token
+export ELASTICSEARCH_ENDPOINT=http://localhost:9200
+export ELASTICSEARCH_API_KEY=token
 ```
 
 ## Argument Reference
@@ -35,3 +35,4 @@ The following arguments are supported:
 
 * `url` - (Required) Url to the ElasticSsearch API
 * `token` - (Required) Authentication token to the ElasticSearch API
+* `insecure` - (Optional) Skip server certification verification
