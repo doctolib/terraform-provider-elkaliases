@@ -222,6 +222,8 @@ func resourceelkAliasesIndexRead(d *schema.ResourceData, m interface{}) error {
 		}
 
 		d.Set("data_stream", []any{dataSteamTemplate})
+	} else {
+		d.Set("data_stream", nil)
 	}
 
 	// Extract and handle template components
