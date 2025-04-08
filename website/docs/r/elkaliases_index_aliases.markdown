@@ -1,19 +1,19 @@
 ---
 layout: "elkaliases"
-page_title: "ElkAliases: elkaliases-alias"
-sidebar_current: "docs-elkaliases-resource-elkaliases_alias"
+page_title: "ElkAliases: elkaliases-index-aliases"
+sidebar_current: "docs-elkaliases-resource-elkaliases_index_aliases"
 description: |-
-  Create an index template
+  Create aliases for an index
 ---
 
 # alkaliases\_index
 
-The ``elkaliases_alias`` resource creates aliases in an index
+The ``elkaliases_index_aliases`` resource creates aliases in an index
 
 ## Usage
 
 ```hcl
-resource "elkaliases_alias" "name" {
+resource "elkaliases_index_aliases" "name" {
   index = "name"
 
   alias {

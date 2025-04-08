@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
-func resourceElkaliasesAlias() *schema.Resource {
+func resourceElkaliasesIndexAliases() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceElkaliasesAliasCreate,
 		ReadContext:   resourceElkaliasesAliasRead,

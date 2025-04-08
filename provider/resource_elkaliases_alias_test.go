@@ -10,11 +10,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 )
 
-func TestAccElkaliasesAliase_basic(t *testing.T) {
+func TestAccElkaliasesIndexAliases_basic(t *testing.T) {
 	t.Run("simple alias", func(t *testing.T) {
-		resourceName := "elkaliases_alias.name"
+		resourceName := "elkaliases_index_aliases.name"
 		config := `
-resource "elkaliases_alias" "name" {
+resource "elkaliases_index_aliases" "name" {
 	index = "index"
 	alias {
 		name = "al"
@@ -39,9 +39,9 @@ resource "elkaliases_alias" "name" {
 	})
 
 	t.Run("multiple aliases", func(t *testing.T) {
-		resourceName := "elkaliases_alias.name"
+		resourceName := "elkaliases_index_aliases.name"
 		config := `
-resource "elkaliases_alias" "name" {
+resource "elkaliases_index_aliases" "name" {
 	index = "index"
 	alias {
 		name = "al"
@@ -71,9 +71,9 @@ resource "elkaliases_alias" "name" {
 	})
 }
 
-func TestAccElkaliasesAliase_invalid(t *testing.T) {
+func TestAccElkaliasesIndexAliases_invalid(t *testing.T) {
 	t.Run("no alias", func(t *testing.T) {
-		config := `resource "elkaliases_alias" "name" {}`
+		config := `resource "elkaliases_index_aliases" "name" {}`
 
 		resource.Test(t, resource.TestCase{
 			PreCheck:  func() { testAccPreCheck(t) },
@@ -88,7 +88,7 @@ func TestAccElkaliasesAliase_invalid(t *testing.T) {
 	})
 	t.Run("empty alias", func(t *testing.T) {
 		config := `
-resource "elkaliases_alias" "name" {
+resource "elkaliases_index_aliases" "name" {
 	alias {}
 }`
 		resource.Test(t, resource.TestCase{
@@ -104,7 +104,7 @@ resource "elkaliases_alias" "name" {
 	})
 	t.Run("missing name", func(t *testing.T) {
 		config := `
-resource "elkaliases_alias" "name" {
+resource "elkaliases_index_aliases" "name" {
 	index = "index"
 	alias {
 	}
@@ -122,7 +122,7 @@ resource "elkaliases_alias" "name" {
 	})
 	t.Run("missing index", func(t *testing.T) {
 		config := `
-resource "elkaliases_alias" "name" {
+resource "elkaliases_index_aliases" "name" {
 	alias {
 		name = "na"
 	}
@@ -140,16 +140,16 @@ resource "elkaliases_alias" "name" {
 	})
 }
 
-func TestAccElkaliasesAliase_add(t *testing.T) {
+func TestAccElkaliasesIndexAliases_add(t *testing.T) {
 	config := `
-resource "elkaliases_alias" "name" {
+resource "elkaliases_index_aliases" "name" {
 	index = "index"
 	alias {
 		name = "na"
 	}
 }`
 	configAdd := `
-resource "elkaliases_alias" "name" {
+resource "elkaliases_index_aliases" "name" {
 	index = "index"
 	alias {
 		name = "na"
@@ -179,9 +179,9 @@ resource "elkaliases_alias" "name" {
 	})
 }
 
-func TestAccElkaliasesAliase_remove(t *testing.T) {
+func TestAccElkaliasesIndexAliases_remove(t *testing.T) {
 	config := `
-resource "elkaliases_alias" "name" {
+resource "elkaliases_index_aliases" "name" {
 	index = "index"
 	alias {
 		name = "an"
@@ -191,7 +191,7 @@ resource "elkaliases_alias" "name" {
 	}
 }`
 	configAdd := `
-resource "elkaliases_alias" "name" {
+resource "elkaliases_index_aliases" "name" {
 	index = "index"
 	alias {
 		name = "an"
