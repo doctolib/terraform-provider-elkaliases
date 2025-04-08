@@ -16,6 +16,9 @@
                 <li<%= sidebar_current("docs-elkaliases-resource-elkaliases_index") %>>
                     <a href="/docs/providers/elkaliases/r/elkaliases_index.html">elkaliases_index</a>
                 </li>
+                <li<%= sidebar_current("docs-elkaliases-resource-elkaliases_alias") %>>
+                    <a href="/docs/providers/elkaliases/r/elkaliases_alias.html">elkaliases_alias</a>
+                </li>
             </ul>
         </li>
       </ul>
