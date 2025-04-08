@@ -33,7 +33,6 @@ func Provider() *schema.Provider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"elkaliases_index": resourceelkAliasesIndex(),
 			"elkaliases_alias": resourceElkaliasesAlias(),
 		},
 		ConfigureFunc: providerConfigure,
