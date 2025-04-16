@@ -8,7 +8,11 @@ description: |-
 
 # ElkAliases Provider
 
-The ElkAliases provider gives the ability to deploy index template to a ElasticSearch server
+The ElkAliases provider gives the ability to add aliases to index and data-stream to a ElasticSearch server
+
+With the current provider from elasticstack, the only place where it is possible to declare aliases is in the index template creation.
+This approach doesn't allow us to add aliases to indexes that are already created, since the template is used only at the creation of a new index and doesn't apply to already existing ones.
+To solve this problem, we have created this provider, which enables you through the `elkaliases_index_aliases` resource to add aliases to existing indices.
 
 Use the navigation to the left to read about the available resources.
 
