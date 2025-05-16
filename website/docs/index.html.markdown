@@ -39,6 +39,6 @@ export ELASTICSEARCH_API_KEY=token
 
 The following arguments are supported:
 
-* `url` - (Option) Url to the ElasticSsearch API. Default is `ELASTICSEARCH_ENDPOINT` environment variable.
+* `url` - (Option) Url to the Elasticsearch API. Default is `ELASTICSEARCH_ENDPOINT` environment variable.
 * `token` - (Option) Authentication token to the ElasticSearch API. Default is `ELASTICSEARCH_API_KEY` environment variable.
 * `insecure` - (Optional) Skip server certification verification
