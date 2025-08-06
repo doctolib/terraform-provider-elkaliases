@@ -8,7 +8,13 @@ description: |-
 
 # ElkAliases Provider
 
-The ElkAliases provider gives the ability to deploy index template to a ElasticSearch server
+The ElkAliases provider gives the ability to add aliases on indexes, created by an [index templates](https://registry.terraform.io/providers/elastic/elasticstack/latest/docs/resources/elasticsearch_index_template).
+
+With the current provider from elasticstack, there is no solution to [add aliases to an existing index](https://github.com/elastic/terraform-provider-elasticstack/issues/285).
+To solve this problem, we have created this provider, which enables you through the `elkaliases_index_aliases` resource to add aliases to existing index or data stream.
+If you use this provider, you should not declare `alias` with `elasticstack_elasticsearch_index_template` resource.
+
+This provider is a workaround, waiting for a long term solution in [the official provider](https://registry.terraform.io/providers/elastic/elasticstack/latest).
 
 Use the navigation to the left to read about the available resources.
 
@@ -33,6 +39,6 @@ export ELASTICSEARCH_API_KEY=token
 
 The following arguments are supported:
 
-* `url` - (Required) Url to the ElasticSsearch API
-* `token` - (Required) Authentication token to the ElasticSearch API
+* `url` - (Option) Url to the Elasticsearch API. Default is `ELASTICSEARCH_ENDPOINT` environment variable.
+* `token` - (Option) Authentication token to the ElasticSearch API. Default is `ELASTICSEARCH_API_KEY` environment variable.
 * `insecure` - (Optional) Skip server certification verification
