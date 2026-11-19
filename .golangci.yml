@@ -1,7 +1,17 @@
-issues:
-  exclude-rules:
-    - linters:
-        - errcheck
-      text: "Error return value of `d.Set` is not checked"
+version: "2"
+linters:
+  exclusions:
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - errcheck
+        text: "Error return value of `d.Set` is not checked"
+      - linters:
+          - staticcheck
+        text: "SA1019: \\(github.com/hashicorp/terraform-plugin-sdk/v2/" # existing SDK v2 deprecations, not checked by v1
 run:
   timeout: 5m
